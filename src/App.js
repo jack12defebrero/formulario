@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Swal from "sweetalert2"; // Importar SweetAlert2
 import { saveFormData } from "./firebase";
 import './index.css';
+import vaquitaImage from './img/vaquita.jpeg';
+import TechnologyImages from './TechnologyImages'; // Ajusta la ruta según sea necesario
+
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -13,16 +16,16 @@ function App() {
     email: "",
     antivirus: "",
     roboInformacion: "",
-    softwareProteccion: "",
-    serviciosAntivirus: [],
+    areaProgramacion: "",
+    proyectos: [],
     otroServicio: "",
-    conocimientoAntivirus: "",
+    EntornosDesarrollo: "",
     importanciaProteccion: 0,
-    promoverCiberseguridad: "",
+    promoverProgramacion: "",
     lenguajesProgramacion: [],
     otroLenguaje: "",
     nivelProgramador: "", // Añadido para la cuarta etapa
-    interesProgramacion: "",
+    FrecuenciaProgramacion: "",
     interesProteccion: 0,
   });
 
@@ -32,7 +35,7 @@ function App() {
     const { name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
-      if (name === "serviciosAntivirus" || name === "lenguajesProgramacion") {
+      if (name === "proyectos" || name === "lenguajesProgramacion") {
         let updatedList = [...formData[name]];
         if (checked) {
           updatedList.push(value);
@@ -77,18 +80,18 @@ function App() {
     }
 
     if (currentStep === 3) {
-      if (!formData.softwareProteccion) {
+      if (!formData.areaProgramacion) {
         setError("Por favor, responde todas las preguntas.");
         return;
       }
-      if (formData.serviciosAntivirus.length === 0 && !formData.otroServicio.trim()) {
+      if (formData.proyectos.length === 0 && !formData.otroServicio.trim()) {
         setError("Por favor, selecciona al menos un servicio de antivirus o especifica 'Otro'.");
         return;
       }
     }
 
     if (currentStep === 4) {
-      if (!formData.conocimientoAntivirus || !formData.nivelProgramador.trim()) {
+      if (!formData.EntornosDesarrollo || !formData.nivelProgramador.trim()) {
         setError("Por favor, responde todas las preguntas.");
         return;
       }
@@ -106,7 +109,7 @@ function App() {
     e.preventDefault();
 
     // Validación final
-    if (!formData.promoverCiberseguridad.trim() || formData.interesProteccion === "") {
+    if (!formData.promoverProgramacion.trim() || formData.interesProteccion === "") {
       setError("Por favor, completa todas las preguntas.");
       return;
     }
@@ -128,16 +131,16 @@ function App() {
         email: "",
         antivirus: "",
         roboInformacion: "",
-        softwareProteccion: "",
-        serviciosAntivirus: [],
+        areaProgramacion: "",
+        proyectos: [],
         otroServicio: "",
-        conocimientoAntivirus: "",
+        EntornosDesarrollo: "",
         importanciaProteccion: 0,
-        promoverCiberseguridad: "",
+        promoverProgramacion: "",
         lenguajesProgramacion: [],
         otroLenguaje: "",
         nivelProgramador: "", // Resetear el campo
-        interesProgramacion: "",
+        FrecuenciaProgramacion: "",
         interesProteccion: 0,
       });
 
@@ -149,10 +152,15 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div className=" flex justify-center items-center min-h-screen bg-gray-100 p-4  ">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center">Formulario de Ciberseguridad</h2>
-
+        <h2 className="text-3xl font-bold mb-6 text-center">Formulario para programación</h2>
+<main className="rounded">
+   <TechnologyImages/>
+</main>
+       
+       
+     
         {/* Mostrar mensaje de error */}
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
@@ -200,52 +208,52 @@ function App() {
           <>
             {/* Pregunta 1 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Sabes qué es un antivirus? *</p>
+              <p className="text-gray-700 mb-2">¿Tienes noción de qué es la programación o alguna vez has intentado aprender a programar?</p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
                   name="antivirus"
-                  value="Sí"
+                  value="Sí, tengo conocimientos básicos."
                   onChange={handleChange}
-                  checked={formData.antivirus === "Sí"}
+                  checked={formData.antivirus === "Sí, tengo conocimientos básicos."}
                   className="form-radio h-5 w-5 text-blue-600"
                   required
                 />
-                <span className="ml-2">Sí</span>
+                <span className="ml-2">Sí, tengo conocimientos básicos.</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
                   name="antivirus"
-                  value="No"
+                  value="Sí, tengo conocimientos intermedios o avanzados."
                   onChange={handleChange}
-                  checked={formData.antivirus === "No"}
+                  checked={formData.antivirus === "Sí, tengo conocimientos intermedios o avanzados."}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">No</span>
+                <span className="ml-2">Sí, tengo conocimientos intermedios o avanzados.</span>
               </label>
               <label className="inline-flex items-center">
                 <input
                   type="radio"
                   name="antivirus"
-                  value="Tal vez"
+                  value="No, pero me gustaría aprender."
                   onChange={handleChange}
-                  checked={formData.antivirus === "Tal vez"}
+                  checked={formData.antivirus === "No, pero me gustaría aprender."}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Tal vez</span>
+                <span className="ml-2">No, pero me gustaría aprender.</span>
               </label>
             </div>
 
             {/* Pregunta 2 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Has sufrido algún robo o ataque de información y datos privados en tu ordenador? *</p>
+              <p className="text-gray-700 mb-2">Has utilizado alguna herramienta o recurso en línea para aprender a programar?</p>
               <textarea
                 name="roboInformacion"
                 value={formData.roboInformacion}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
-                placeholder="Describe tu experiencia"
+                placeholder="Describe las herramientas"
                 required
               ></textarea>
             </div>
@@ -257,119 +265,131 @@ function App() {
           <>
             {/* Pregunta 3 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Cuentas con un software que proteja tu equipo o dispositivo (antivirus o semejante)? *</p>
+              <p className="text-gray-700 mb-2">¿Qué área de programación te interesa más?</p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
-                  name="softwareProteccion"
-                  value="Sí"
+                  name="areaProgramacion"
+                  value="Desarrollo web"
                   onChange={handleChange}
-                  checked={formData.softwareProteccion === "Sí"}
+                  checked={formData.areaProgramacion === "Desarrollo web"}
                   className="form-radio h-5 w-5 text-blue-600"
                   required
                 />
-                <span className="ml-2">Sí</span>
+                <span className="ml-2">Desarrollo web</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
-                  name="softwareProteccion"
-                  value="No"
+                  name="areaProgramacion"
+                  value="Desarrollo de software"
                   onChange={handleChange}
-                  checked={formData.softwareProteccion === "No"}
+                  checked={formData.areaProgramacion === "Desarrollo de software"}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">No</span>
+                <span className="ml-2">Desarrollo de software</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
-                  name="softwareProteccion"
-                  value="No recuerdo"
+                  name="areaProgramacion"
+                  value="Ciencia de datos e IA"
                   onChange={handleChange}
-                  checked={formData.softwareProteccion === "No recuerdo"}
+                  checked={formData.areaProgramacion === "Ciencia de datos e IA"}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">No recuerdo</span>
+                <span className="ml-2">Ciencia de datos e IA</span>
               </label>
               <label className="inline-flex items-center">
                 <input
                   type="radio"
-                  name="softwareProteccion"
-                  value="No lo considero necesario"
+                  name="areaProgramacion"
+                  value="Seguridad informática"
                   onChange={handleChange}
-                  checked={formData.softwareProteccion === "No lo considero necesario"}
+                  checked={formData.areaProgramacion === "Seguridad informática"}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">No lo considero necesario</span>
+                <span className="ml-2">Seguridad informática</span>
+              </label>
+
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="areaProgramacion"
+                  value="Automatización de procesos"
+                  onChange={handleChange}
+                  checked={formData.areaProgramacion === "Automatización de procesos"}
+                  className="form-radio h-5 w-5 text-blue-600"
+                />
+                <span className="ml-2">Automatización de procesos</span>
               </label>
             </div>
 
             {/* Pregunta 4 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Qué servicios de antivirus conoces o tienes en tu ordenador? *</p>
+              <p className="text-gray-700 mb-2">¿Qué tipo de proyectos has realizado con programación? (Puedes seleccionar varios)</p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
-                  name="serviciosAntivirus"
-                  value="McAfee Total Protection"
+                  name="proyectos"
+                  value="Sitios web estáticos (HTML/CSS)"
                   onChange={handleChange}
-                  checked={formData.serviciosAntivirus.includes("McAfee Total Protection")}
+                  checked={formData.proyectos.includes("Sitios web estáticos (HTML/CSS)")}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">McAfee Total Protection</span>
+                <span className="ml-2">Sitios web estáticos (HTML/CSS)</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
-                  name="serviciosAntivirus"
-                  value="Norton 360"
+                  name="proyectos"
+                  value="Aplicaciones web (JavaScript, frameworks)"
                   onChange={handleChange}
-                  checked={formData.serviciosAntivirus.includes("Norton 360")}
+                  checked={formData.proyectos.includes("Aplicaciones web (JavaScript, frameworks)")}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Norton 360</span>
+                <span className="ml-2">Aplicaciones web (JavaScript, frameworks)</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
-                  name="serviciosAntivirus"
-                  value="Avira Prime"
+                  name="proyectos"
+                  value="Programas de escritorio (C++, Java)"
                   onChange={handleChange}
-                  checked={formData.serviciosAntivirus.includes("Avira Prime")}
+                  checked={formData.proyectos.includes("Programas de escritorio (C++, Java)")}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Avira Prime</span>
+                <span className="ml-2">Programas de escritorio (C++, Java)</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
-                  name="serviciosAntivirus"
-                  value="Bitdefender Total Security"
+                  name="proyectos"
+                  value="Scripts de automatización (Python, bash, powershell)"
                   onChange={handleChange}
-                  checked={formData.serviciosAntivirus.includes("Bitdefender Total Security")}
+                  checked={formData.proyectos.includes("Scripts de automatización (Python, bash, powershell)")}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Bitdefender Total Security</span>
+                <span className="ml-2">Scripts de automatización (Python, bash, powershell)</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
-                  name="serviciosAntivirus"
-                  value="Kaspersky Internet Security"
+                  name="proyectos"
+                  value="Proyectos de ciencia de datos (Python, R)"
                   onChange={handleChange}
-                  checked={formData.serviciosAntivirus.includes("Kaspersky Internet Security")}
+                  checked={formData.proyectos.includes("Proyectos de ciencia de datos (Python, R)")}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Kaspersky Internet Security</span>
+                <span className="ml-2">Proyectos de ciencia de datos (Python, R)</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
-                  name="serviciosAntivirus"
+                  name="proyectos"
                   value="Ninguno"
                   onChange={handleChange}
-                  checked={formData.serviciosAntivirus.includes("Ninguno")}
+                  checked={formData.proyectos.includes("Ninguno")}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Ninguno</span>
@@ -378,15 +398,15 @@ function App() {
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
-                  name="serviciosAntivirus"
+                  name="proyectos"
                   value="Otros"
                   onChange={handleChange}
-                  checked={formData.serviciosAntivirus.includes("Otros")}
+                  checked={formData.proyectos.includes("Otros")}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Otros</span>
               </label>
-              {formData.serviciosAntivirus.includes("Otros") && (
+              {formData.proyectos.includes("Otros") && (
                 <div className="mt-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="otroServicio">
                     Especifica otro servicio de antivirus:
@@ -411,51 +431,75 @@ function App() {
           <>
             {/* Pregunta 5 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Conoces la importancia y el uso de un antivirus, o de las herramientas de prevención y detección? *</p>
+              <p className="text-gray-700 mb-2">¿Qué herramientas o entornos de desarrollo utilizas para programar? (Puedes seleccionar varios)</p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
-                  name="conocimientoAntivirus"
-                  value="Sí tengo conocimiento"
+                  name="EntornosDesarrollo"
+                  value="Visual Studio Code"
                   onChange={handleChange}
-                  checked={formData.conocimientoAntivirus === "Sí tengo conocimiento"}
+                  checked={formData.EntornosDesarrollo === "Visual Studio Code"}
                   className="form-radio h-5 w-5 text-blue-600"
                   required
                 />
-                <span className="ml-2">Sí tengo conocimiento</span>
+                <span className="ml-2">Visual Studio Code</span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
-                  name="conocimientoAntivirus"
-                  value="Mi conocimiento es mínimo"
+                  name="EntornosDesarrollo"
+                  value="PyCharm"
                   onChange={handleChange}
-                  checked={formData.conocimientoAntivirus === "Mi conocimiento es mínimo"}
+                  checked={formData.EntornosDesarrollo === "PyCharm"}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Mi conocimiento es mínimo</span>
+                <span className="ml-2">PyCharm</span>
               </label>
               <label className="inline-flex items-center">
                 <input
                   type="radio"
-                  name="conocimientoAntivirus"
-                  value="No tengo conocimiento del tema"
+                  name="EntornosDesarrollo"
+                  value="Eclipse"
                   onChange={handleChange}
-                  checked={formData.conocimientoAntivirus === "No tengo conocimiento del tema"}
+                  checked={formData.EntornosDesarrollo === "Eclipse"}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">No tengo conocimiento del tema</span>
+                <span className="ml-2">Eclipse</span>
+              </label>
+
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="EntornosDesarrollo"
+                  value="IntelliJ IDEA"
+                  onChange={handleChange}
+                  checked={formData.EntornosDesarrollo === "IntelliJ IDEA"}
+                  className="form-radio h-5 w-5 text-blue-600"
+                />
+                <span className="ml-2">IntelliJ IDEA</span>
+              </label>
+
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="EntornosDesarrollo"
+                  value="No utilizo herramientas específicas"
+                  onChange={handleChange}
+                  checked={formData.EntornosDesarrollo === "No utilizo herramientas específicas"}
+                  className="form-radio h-5 w-5 text-blue-600"
+                />
+                <span className="ml-2">No utilizo herramientas específicas</span>
               </label>
             </div>
 
             {/* Pregunta 6 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Consideras a los servicios de protección y detección de datos u archivos, cómo herramientas de gran importancia? *</p>
+              <p className="text-gray-700 mb-2">¿Consideras que la programacion es importante hoy en día?</p>
               <input
                 type="range"
                 name="importanciaProteccion"
                 min="0"
-                max="5"
+                max="20"
                 value={formData.importanciaProteccion}
                 onChange={handleChange}
                 className="w-full"
@@ -600,10 +644,10 @@ function App() {
           <>
             {/* Pregunta 9 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Crees que es importante promover el conocimiento de la ciberseguridad? ¿Por qué? *</p>
+              <p className="text-gray-700 mb-2">¿Crees que es importante promover el conocimiento de la  programación ¿Por qué?</p>
               <textarea
-                name="promoverCiberseguridad"
-                value={formData.promoverCiberseguridad}
+                name="promoverProgramacion"
+                value={formData.promoverProgramacion}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
                 placeholder="Escribe tu respuesta"
@@ -613,40 +657,85 @@ function App() {
 
             {/* Pregunta 10 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Te gustaría estar pendiente a las últimas noticias referentes al mundo de la programación y la ciberseguridad? *</p>
+              <p className="text-gray-700 mb-2">¿Con qué frecuencia practicas programación?</p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
-                  name="interesProgramacion"
-                  value="Sí"
+                  name="FrecuenciaProgramacion"
+                  value="Nunca"
                   onChange={handleChange}
-                  checked={formData.interesProgramacion === "Sí"}
+                  checked={formData.FrecuenciaProgramacion === "Nunca"}
                   className="form-radio h-5 w-5 text-blue-600"
                   required
                 />
-                <span className="ml-2">Sí</span>
+                <span className="ml-2">Nunca</span>
               </label>
+
+
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
-                  name="interesProgramacion"
-                  value="No"
+                  name="FrecuenciaProgramacion"
+                  value="Ocasionalmente (1-2 veces al mes)"
                   onChange={handleChange}
-                  checked={formData.interesProgramacion === "No"}
+                  checked={formData.FrecuenciaProgramacion === "Ocasionalmente (1-2 veces al mes)"}
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">No</span>
+                <span className="ml-2">Ocasionalmente (1-2 veces al mes)</span>
+              </label>
+
+              <label className="inline-flex items-center mr-4">
+                <input
+                  type="radio"
+                  name="FrecuenciaProgramacion"
+                  value="Semanalmente"
+                  onChange={handleChange}
+                  checked={formData.FrecuenciaProgramacion === "Semanalmente"}
+                  className="form-radio h-5 w-5 text-blue-600"
+                />
+                <span className="ml-2">Semanalmente</span>
+              </label>
+
+
+              <label className="inline-flex items-center mr-4">
+                <input
+                  type="radio"
+                  name="FrecuenciaProgramacion"
+                  value="Diariamente"
+                  onChange={handleChange}
+                  checked={formData.FrecuenciaProgramacion === "Diariamente"}
+                  className="form-radio h-5 w-5 text-blue-600"
+                />
+                <span className="ml-2">Diariamente</span>
+              </label>
+
+
+              <label className="inline-flex items-center mr-4">
+                <input
+                  type="radio"
+                  name="FrecuenciaProgramacion"
+                  value="Aveces"
+                  onChange={handleChange}
+                  checked={formData.FrecuenciaProgramacion === "Aveces"}
+                  className="form-radio h-5 w-5 text-blue-600"
+                />
+                <span className="ml-2">Aveces</span>
               </label>
             </div>
 
+
+
+
+
+
             {/* Pregunta 11 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Te interesa conocer más sobre cómo proteger y crear programas que mantengan seguro y protegido a tus equipos? *</p>
+              <p className="text-gray-700 mb-2">¿Te gustaría recibir más información o recursos sobre programación?</p>
               <input
                 type="range"
                 name="interesProteccion"
                 min="0"
-                max="5"
+                max="20"
                 value={formData.interesProteccion}
                 onChange={handleChange}
                 className="w-full"

@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2"; // Importar SweetAlert2
 import { saveFormData } from "./firebase";
-import './index.css';
-import TechnologyImages from './TechnologyImages'; // Ajusta la ruta según sea necesario
-import { Analytics } from "@vercel/analytics/react"
-
+import "./index.css";
+import TechnologyImages from "./TechnologyImages"; // Ajusta la ruta según sea necesario
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -40,7 +39,7 @@ function App() {
         if (checked) {
           updatedList.push(value);
         } else {
-          updatedList = updatedList.filter(item => item !== value);
+          updatedList = updatedList.filter((item) => item !== value);
         }
         setFormData((prevState) => ({
           ...prevState,
@@ -85,7 +84,9 @@ function App() {
         return;
       }
       if (formData.proyectos.length === 0 && !formData.otroServicio.trim()) {
-        setError("Por favor, selecciona al menos un servicio de antivirus o especifica 'Otro'.");
+        setError(
+          "Por favor, selecciona al menos un servicio de antivirus o especifica 'Otro'."
+        );
         return;
       }
     }
@@ -109,7 +110,10 @@ function App() {
     e.preventDefault();
 
     // Validación final
-    if (!formData.promoverProgramacion.trim() || formData.interesProteccion === "") {
+    if (
+      !formData.promoverProgramacion.trim() ||
+      formData.interesProteccion === ""
+    ) {
       setError("Por favor, completa todas las preguntas.");
       return;
     }
@@ -119,10 +123,10 @@ function App() {
 
       // Mostrar alerta de éxito
       Swal.fire({
-        icon: 'success',
-        title: 'Formulario enviado',
-        text: 'Tu mensaje ha sido enviado con éxito.',
-        confirmButtonText: 'Ok'
+        icon: "success",
+        title: "Formulario enviado",
+        text: "Tu mensaje ha sido enviado con éxito.",
+        confirmButtonText: "Ok",
       });
 
       // Limpiar el formulario
@@ -147,21 +151,26 @@ function App() {
       setCurrentStep(1);
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
-      setError("Hubo un error al enviar tu respuesta. Por favor, intenta nuevamente.");
+      setError(
+        "Hubo un error al enviar tu respuesta. Por favor, intenta nuevamente."
+      );
     }
   };
 
   return (
     <div className=" flex justify-center items-center min-h-screen bg-gray-100 p-4  ">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center">Formulario para programación</h2>
-<main className="rounded">
-   <TechnologyImages/>
-   <Analytics />
-</main>
-       
-       
-     
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
+      >
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          Formulario para programación
+        </h2>
+        <main className="rounded">
+          <TechnologyImages />
+          <Analytics />
+        </main>
+
         {/* Mostrar mensaje de error */}
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
@@ -170,7 +179,10 @@ function App() {
           <>
             {/* Contenedor Nombre */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombre">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="nombre"
+              >
                 Nombre:
               </label>
               <input
@@ -187,7 +199,10 @@ function App() {
 
             {/* Contenedor Email */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="email"
+              >
                 Email:
               </label>
               <input
@@ -209,14 +224,19 @@ function App() {
           <>
             {/* Pregunta 1 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Tienes noción de qué es la programación o alguna vez has intentado aprender a programar?</p>
+              <p className="text-gray-700 mb-2">
+                ¿Tienes noción de qué es la programación o alguna vez has
+                intentado aprender a programar?
+              </p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
                   name="antivirus"
                   value="Sí, tengo conocimientos básicos."
                   onChange={handleChange}
-                  checked={formData.antivirus === "Sí, tengo conocimientos básicos."}
+                  checked={
+                    formData.antivirus === "Sí, tengo conocimientos básicos."
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                   required
                 />
@@ -228,10 +248,15 @@ function App() {
                   name="antivirus"
                   value="Sí, tengo conocimientos intermedios o avanzados."
                   onChange={handleChange}
-                  checked={formData.antivirus === "Sí, tengo conocimientos intermedios o avanzados."}
+                  checked={
+                    formData.antivirus ===
+                    "Sí, tengo conocimientos intermedios o avanzados."
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Sí, tengo conocimientos intermedios o avanzados.</span>
+                <span className="ml-2">
+                  Sí, tengo conocimientos intermedios o avanzados.
+                </span>
               </label>
               <label className="inline-flex items-center">
                 <input
@@ -239,7 +264,9 @@ function App() {
                   name="antivirus"
                   value="No, pero me gustaría aprender."
                   onChange={handleChange}
-                  checked={formData.antivirus === "No, pero me gustaría aprender."}
+                  checked={
+                    formData.antivirus === "No, pero me gustaría aprender."
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">No, pero me gustaría aprender.</span>
@@ -248,7 +275,10 @@ function App() {
 
             {/* Pregunta 2 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">Has utilizado alguna herramienta o recurso en línea para aprender a programar?</p>
+              <p className="text-gray-700 mb-2">
+                Has utilizado alguna herramienta o recurso en línea para
+                aprender a programar?
+              </p>
               <textarea
                 name="roboInformacion"
                 value={formData.roboInformacion}
@@ -266,7 +296,9 @@ function App() {
           <>
             {/* Pregunta 3 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Qué área de programación te interesa más?</p>
+              <p className="text-gray-700 mb-2">
+                ¿Qué área de programación te interesa más?
+              </p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
@@ -285,7 +317,9 @@ function App() {
                   name="areaProgramacion"
                   value="Desarrollo de software"
                   onChange={handleChange}
-                  checked={formData.areaProgramacion === "Desarrollo de software"}
+                  checked={
+                    formData.areaProgramacion === "Desarrollo de software"
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Desarrollo de software</span>
@@ -296,7 +330,9 @@ function App() {
                   name="areaProgramacion"
                   value="Ciencia de datos e IA"
                   onChange={handleChange}
-                  checked={formData.areaProgramacion === "Ciencia de datos e IA"}
+                  checked={
+                    formData.areaProgramacion === "Ciencia de datos e IA"
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Ciencia de datos e IA</span>
@@ -307,7 +343,9 @@ function App() {
                   name="areaProgramacion"
                   value="Seguridad informática"
                   onChange={handleChange}
-                  checked={formData.areaProgramacion === "Seguridad informática"}
+                  checked={
+                    formData.areaProgramacion === "Seguridad informática"
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Seguridad informática</span>
@@ -319,7 +357,9 @@ function App() {
                   name="areaProgramacion"
                   value="Automatización de procesos"
                   onChange={handleChange}
-                  checked={formData.areaProgramacion === "Automatización de procesos"}
+                  checked={
+                    formData.areaProgramacion === "Automatización de procesos"
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Automatización de procesos</span>
@@ -328,14 +368,19 @@ function App() {
 
             {/* Pregunta 4 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Qué tipo de proyectos has realizado con programación? (Puedes seleccionar varios)</p>
+              <p className="text-gray-700 mb-2">
+                ¿Qué tipo de proyectos has realizado con programación? (Puedes
+                seleccionar varios)
+              </p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
                   name="proyectos"
                   value="Sitios web estáticos (HTML/CSS)"
                   onChange={handleChange}
-                  checked={formData.proyectos.includes("Sitios web estáticos (HTML/CSS)")}
+                  checked={formData.proyectos.includes(
+                    "Sitios web estáticos (HTML/CSS)"
+                  )}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Sitios web estáticos (HTML/CSS)</span>
@@ -346,10 +391,14 @@ function App() {
                   name="proyectos"
                   value="Aplicaciones web (JavaScript, frameworks)"
                   onChange={handleChange}
-                  checked={formData.proyectos.includes("Aplicaciones web (JavaScript, frameworks)")}
+                  checked={formData.proyectos.includes(
+                    "Aplicaciones web (JavaScript, frameworks)"
+                  )}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Aplicaciones web (JavaScript, frameworks)</span>
+                <span className="ml-2">
+                  Aplicaciones web (JavaScript, frameworks)
+                </span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
@@ -357,10 +406,14 @@ function App() {
                   name="proyectos"
                   value="Programas de escritorio (C++, Java)"
                   onChange={handleChange}
-                  checked={formData.proyectos.includes("Programas de escritorio (C++, Java)")}
+                  checked={formData.proyectos.includes(
+                    "Programas de escritorio (C++, Java)"
+                  )}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Programas de escritorio (C++, Java)</span>
+                <span className="ml-2">
+                  Programas de escritorio (C++, Java)
+                </span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
@@ -368,10 +421,14 @@ function App() {
                   name="proyectos"
                   value="Scripts de automatización (Python, bash, powershell)"
                   onChange={handleChange}
-                  checked={formData.proyectos.includes("Scripts de automatización (Python, bash, powershell)")}
+                  checked={formData.proyectos.includes(
+                    "Scripts de automatización (Python, bash, powershell)"
+                  )}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Scripts de automatización (Python, bash, powershell)</span>
+                <span className="ml-2">
+                  Scripts de automatización (Python, bash, powershell)
+                </span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
@@ -379,10 +436,14 @@ function App() {
                   name="proyectos"
                   value="Proyectos de ciencia de datos (Python, R)"
                   onChange={handleChange}
-                  checked={formData.proyectos.includes("Proyectos de ciencia de datos (Python, R)")}
+                  checked={formData.proyectos.includes(
+                    "Proyectos de ciencia de datos (Python, R)"
+                  )}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">Proyectos de ciencia de datos (Python, R)</span>
+                <span className="ml-2">
+                  Proyectos de ciencia de datos (Python, R)
+                </span>
               </label>
               <label className="inline-flex items-center mr-4">
                 <input
@@ -409,7 +470,10 @@ function App() {
               </label>
               {formData.proyectos.includes("Otros") && (
                 <div className="mt-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="otroServicio">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="otroServicio"
+                  >
                     Especifica otro servicio de antivirus:
                   </label>
                   <input
@@ -432,7 +496,10 @@ function App() {
           <>
             {/* Pregunta 5 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Qué herramientas o entornos de desarrollo utilizas para programar? (Puedes seleccionar varios)</p>
+              <p className="text-gray-700 mb-2">
+                ¿Qué herramientas o entornos de desarrollo utilizas para
+                programar? (Puedes seleccionar varios)
+              </p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
@@ -486,16 +553,23 @@ function App() {
                   name="EntornosDesarrollo"
                   value="No utilizo herramientas específicas"
                   onChange={handleChange}
-                  checked={formData.EntornosDesarrollo === "No utilizo herramientas específicas"}
+                  checked={
+                    formData.EntornosDesarrollo ===
+                    "No utilizo herramientas específicas"
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
-                <span className="ml-2">No utilizo herramientas específicas</span>
+                <span className="ml-2">
+                  No utilizo herramientas específicas
+                </span>
               </label>
             </div>
 
             {/* Pregunta 6 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Consideras que la programacion es importante hoy en día?</p>
+              <p className="text-gray-700 mb-2">
+                ¿Consideras que la programacion es importante hoy en día?
+              </p>
               <input
                 type="range"
                 name="importanciaProteccion"
@@ -509,12 +583,16 @@ function App() {
                 <span>No lo considero importante</span>
                 <span>Lo considero muy importante</span>
               </div>
-              <span className="block text-center mt-1">Valor: {formData.importanciaProteccion}</span>
+              <span className="block text-center mt-1">
+                Valor: {formData.importanciaProteccion}
+              </span>
             </div>
 
             {/* Pregunta 7 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Conoces o usas alguno de estos lenguajes de programación? *</p>
+              <p className="text-gray-700 mb-2">
+                ¿Conoces o usas alguno de estos lenguajes de programación? *
+              </p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="checkbox"
@@ -543,7 +621,9 @@ function App() {
                   name="lenguajesProgramacion"
                   value="JavaScript"
                   onChange={handleChange}
-                  checked={formData.lenguajesProgramacion.includes("JavaScript")}
+                  checked={formData.lenguajesProgramacion.includes(
+                    "JavaScript"
+                  )}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">JavaScript</span>
@@ -583,7 +663,10 @@ function App() {
               </label>
               {formData.lenguajesProgramacion.includes("Otros") && (
                 <div className="mt-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="otroLenguaje">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="otroLenguaje"
+                  >
                     Especifica otros lenguajes:
                   </label>
                   <input
@@ -601,7 +684,9 @@ function App() {
 
             {/* Nueva Pregunta 8: Nivel de Programador */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Cuál es tu nivel como programador? *</p>
+              <p className="text-gray-700 mb-2">
+                ¿Cuál es tu nivel como programador? *
+              </p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
@@ -645,7 +730,10 @@ function App() {
           <>
             {/* Pregunta 9 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Crees que es importante promover el conocimiento de la  programación ¿Por qué?</p>
+              <p className="text-gray-700 mb-2">
+                ¿Crees que es importante promover el conocimiento de la
+                programación ¿Por qué?
+              </p>
               <textarea
                 name="promoverProgramacion"
                 value={formData.promoverProgramacion}
@@ -658,7 +746,9 @@ function App() {
 
             {/* Pregunta 10 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Con qué frecuencia practicas programación?</p>
+              <p className="text-gray-700 mb-2">
+                ¿Con qué frecuencia practicas programación?
+              </p>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
@@ -672,14 +762,16 @@ function App() {
                 <span className="ml-2">Nunca</span>
               </label>
 
-
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
                   name="FrecuenciaProgramacion"
                   value="Ocasionalmente (1-2 veces al mes)"
                   onChange={handleChange}
-                  checked={formData.FrecuenciaProgramacion === "Ocasionalmente (1-2 veces al mes)"}
+                  checked={
+                    formData.FrecuenciaProgramacion ===
+                    "Ocasionalmente (1-2 veces al mes)"
+                  }
                   className="form-radio h-5 w-5 text-blue-600"
                 />
                 <span className="ml-2">Ocasionalmente (1-2 veces al mes)</span>
@@ -697,7 +789,6 @@ function App() {
                 <span className="ml-2">Semanalmente</span>
               </label>
 
-
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
@@ -709,7 +800,6 @@ function App() {
                 />
                 <span className="ml-2">Diariamente</span>
               </label>
-
 
               <label className="inline-flex items-center mr-4">
                 <input
@@ -724,14 +814,12 @@ function App() {
               </label>
             </div>
 
-
-
-
-
-
             {/* Pregunta 11 */}
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">¿Te gustaría recibir más información o recursos sobre programación?</p>
+              <p className="text-gray-700 mb-2">
+                ¿Te gustaría recibir más información o recursos sobre
+                programación?
+              </p>
               <input
                 type="range"
                 name="interesProteccion"
@@ -745,7 +833,9 @@ function App() {
                 <span>No</span>
                 <span>Si</span>
               </div>
-              <span className="block text-center mt-1">Valor: {formData.interesProteccion}</span>
+              <span className="block text-center mt-1">
+                Valor: {formData.interesProteccion}
+              </span>
             </div>
           </>
         )}

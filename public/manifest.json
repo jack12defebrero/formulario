@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Formulario app",
+  "name": "Formulario para participacion en clase de ti",
   "icons": [
     {
       "src": "favicon.ico",

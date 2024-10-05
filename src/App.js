@@ -4,6 +4,7 @@ import Swal from "sweetalert2"; // Importar SweetAlert2
 import { saveFormData } from "./firebase";
 import './index.css';
 import TechnologyImages from './TechnologyImages'; // Ajusta la ruta según sea necesario
+import { Analytics } from "@vercel/analytics/react"
 
 
 function App() {
@@ -156,6 +157,7 @@ function App() {
         <h2 className="text-3xl font-bold mb-6 text-center">Formulario para programación</h2>
 <main className="rounded">
    <TechnologyImages/>
+   <Analytics />
 </main>
        
        

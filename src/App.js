@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Swal from "sweetalert2"; // Importar SweetAlert2
 import { saveFormData } from "./firebase";
 import './index.css';
-import vaquitaImage from './img/vaquita.jpeg';
 import TechnologyImages from './TechnologyImages'; // Ajusta la ruta según sea necesario
 
 
